@@ -1,0 +1,58 @@
+<section>
+<form action="" [formGroup]="formCadastro" (submit)="salvar($event)" class="col-md-6 col-sm-6">
+  <label for="">Titulo *</label>
+  // Exercio 7.2
+  <input class="form-control"
+         [(ngModel)]="foto.titulo"
+         formControlName="titulo"
+         name="titulo"
+         type="text" />
+  <div *ngIf="formCadastro.controls.titulo.invalid">
+    <span *ngIf="formCadastro.controls.titulo.errors.required">
+        Campo não preenchido
+    </span>
+    <span *ngIf="formCadastro.controls.titulo.errors.minlength">
+        Precisa ter pelo menos 3 caracteres
+    </span>
+  </div>
+  <br><br>
+  <label for="">URL *</label>
+  <input class="form-control"
+         name="url"
+         formControlName="url"
+         [(ngModel)]="foto.url"
+         type="text" />
+
+  <label for="">Descrição</label>
+  <textarea class="form-control"
+            name="descricao"
+            id=""
+            formControlName="descricao"
+            [(ngModel)]="foto.descricao"
+            cols="30"
+            rows="10"></textarea>
+
+
+  <h2>
+    Formulário
+    {{ formCadastro.valid }}
+  </h2>
+  <li>{{ formCadastro.controls.titulo.valid }}</li>
+  <li>{{ formCadastro.controls.url.valid }}</li>
+  <li>{{ formCadastro.controls.descricao.valid }}</li>
+
+  <button [disabled]="formCadastro.invalid" type="submit" class="btn btn-success">
+    Salvar
+  </button>
+  <a class="btn btn-danger" [routerLink]="['']">
+    Voltar
+  </a>
+</form>
+
+<!-- Fazer o Preview -->
+<aside class="col-md-6 col-sm-6">
+  <painel titulo="{{ foto.titulo | uppercase }}">
+    <foto [url]="foto.url" [descricao]="foto.descricao"></foto>
+  </painel>
+</aside>
+</section>
